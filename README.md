@@ -10,7 +10,7 @@ Classroom project on using a database, with a user interface that allows users t
 
 ![image](https://user-images.githubusercontent.com/86553042/210796739-60eb8356-6904-49c6-9f7c-abcdaca22e03.png)
 
-## Reqs
+## Requirements
 
 - Microsoft VS 2022
 - Latest ASP.NET vers
