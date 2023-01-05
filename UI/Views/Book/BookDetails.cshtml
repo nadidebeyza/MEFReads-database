@@ -1,0 +1,47 @@
+﻿@model BookViewModel
+@{
+    ViewData["Title"] = "BookDetails";
+    Layout = "_LayoutBookDetails";
+}
+<style>
+    img{
+        max-height:300px;
+        max-width:300px!important;
+    }
+    .BookContent{
+        background-color:#F5F5DC;
+        padding:10px;
+        min-height:50vh;
+    }
+    .BookSummary{
+        text-align: justify;
+        text-justify: inter-word;
+    }
+</style>
+
+
+<div class="container-fluid">
+    <div class="d-flex justify-content-around border border-secondary border-3 rounded BookContent" style="background-color:orange" >
+        <div class="d-flex flex-column">
+            <div class="mb-5 mt-5 me-3 ms-3"><img src="~/images/@Model.Book.ImageSource" /></div>
+            @if (UserInfo.user != null)
+            {
+                @if (UserInfo.user.Role == "Admin")
+                {
+                    <a class="btn btn-success m-4" asp-controller="Book"  asp-action="EditBook" asp-route-ISBN="@Model.Book.ISBN">Edit</a>
+                    <a class="btn btn-danger me-4 ms-4 mb-5" asp-controller="Book" asp-action="DeleteBook" asp-route-ISBN="@Model.Book.ISBN">Delete</a>
+                }
+            }
+
+        </div>
+        <div class="d-flex flex-column justify-content-center">  
+            <div class="text-center"><h3>@Model.Book.Title</h3></div>
+            <div class="BookSummary p-4 m-1 border border-secondary border-1">@Model.Book.Summary</div>
+            <div class="d-flex flex-column justify-content-center p-4 m-1 border border-secondary border-1">
+                <p> <strong>ISBN: </strong> @Model.Book.ISBN</p>
+                <p> <strong>Author: </strong> @Model.Book.Author</p>
+                <p> <strong>Genres: </strong> @foreach(var item in Model.GenreNames){ @item; } </p>
+            </div>
+        </div>
+    </div>
+</div>

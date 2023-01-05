@@ -1,0 +1,31 @@
+﻿@model GenreViewModel
+@{
+    ViewBag.Title = "title";
+}
+<style>
+    .list-group-item{
+        background-color:orange;
+    }
+</style>
+
+<ul class="list-group" >
+    @if (Model.CurrentGenre == 0)
+    {
+        <a href="/book/index" class="list-group-item active">All Genres</a>
+    }
+    else
+    {
+        <a href="/book/index" class="list-group-item">All Items</a>
+    }
+    @foreach (var genre in Model.Genres)
+    {
+            var css = "list-group-item";
+           
+            if (genre.GenreID == Model.CurrentGenre)
+            {
+                css += " active";
+               
+            }
+        <a href="/book/index?genre=@genre.GenreID" class="@css">@genre.GenreName</a>
+    }
+</ul>

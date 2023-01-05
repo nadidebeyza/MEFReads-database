@@ -1,0 +1,70 @@
+﻿@model BookViewModel
+@{
+    ViewData["Title"] = "Index";
+    Layout = "_LayoutBooks";
+}
+<style>
+    .card {
+      flex-direction: row;
+      align-items: center;
+      height:200px;
+      width:800px;
+      padding:10px 5px;
+      margin-bottom: 10px;
+        background-color: orange;
+    }
+    .card-title {
+      font-weight: bold;
+
+    }
+    a {
+      border: none;
+      margin:2px;
+    }
+    .card-body {
+      padding: 10px 20px;
+    }
+    .card-body .card-text {
+      display:block;
+      text-align: justify;
+      text-justify: inter-word;
+      overflow:hidden;
+      max-height:100px;
+      width:550px;
+      margin: 0;
+    }
+    .card img {
+      height: 180px;
+      width: 150px; 
+    }
+</style>
+@if(UserInfo.user != null)
+{
+    @if (UserInfo.user.Role == "Admin")
+{
+    <a class="btn btn-success mb-4" asp-controller="Book" asp-action="AddBook">Add new Book</a>
+}
+}
+
+
+@foreach (var item in Model.Books) {
+<div class="card">
+  <img src="~/images/@item.ImageSource" class="card-img-top" />
+  <div class="card-body">
+    <h5 class="card-title">@item.Title</h5>
+    <p class="card-text">
+                @if (item.Summary.Length > 292)
+                {
+                    @item.Summary.Substring(0,292)
+                    ;
+                }
+                else
+                {
+                    @item.Summary
+                }
+                ...
+    </p>    
+    <a class="btn btn-primary" asp-controller="Book" asp-action="BookDetails" asp-route-ISBN="@item.ISBN">View Details</a>
+  </div>
+</div>
+}
